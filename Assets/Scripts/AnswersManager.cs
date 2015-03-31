@@ -130,11 +130,12 @@ public class AnswersManager : MonoBehaviour
 				}
 				//Las letras normales las ocultamos
 				else{	
-					text.text = "";
 					ButtonLetterCtrl buttonLetterCtrl = buttonLetter.GetComponent<ButtonLetterCtrl>();
 					buttonLetterCtrl.index = nextIndex;
+					buttonLetterCtrl.SetAnswer(text.text);
 					listButtonLetterCtrl.Add(buttonLetterCtrl);
 					nextIndex++;
+					text.text = "";
 				}
 			}
 			buttonLetter.transform.SetParent(currentPanel.transform);
@@ -174,7 +175,11 @@ public class AnswersManager : MonoBehaviour
 		if(OnLetterButtonPressed!=null){
 			OnLetterButtonPressed();
 		}
-		SetNextIndex();
+		if(CheckLevelIsFinished()){
+			Debug.Log("LEVEL COMPLETED");	
+		}else{
+			SetNextIndex();
+		}
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,6 +193,20 @@ public class AnswersManager : MonoBehaviour
 				break;
 			}
 		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Comprobamos si el usuario ha completado el nivel comparando las letras que ha puesto con la respuesta oculta
+	bool CheckLevelIsFinished()
+	{
+		bool correct=true;
+		foreach(ButtonLetterCtrl buttonLetterCtrl in listButtonLetterCtrl){
+			if(!buttonLetterCtrl.CheckAnswer()){
+				correct=false;
+				break;
+			}
+		}
+		return correct;
 	}
 }
 

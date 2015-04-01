@@ -49,6 +49,11 @@ public class AnswersManager : MonoBehaviour
 	//Creamos un evento para avisar a las letras de la respuesta que un boton letra ha sido pulsado
 	public delegate void LetterButtonPressed();
 	public static event LetterButtonPressed OnLetterButtonPressed;
+
+	public GameObject panelLevelCompleted;
+	public Sprite[] images;
+	public Image currentImage;
+	public Text textCurrentLevel;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -61,10 +66,22 @@ public class AnswersManager : MonoBehaviour
 	
 	void Start()
 	{
+		if(PlayerPrefs.HasKey("CurrentLevel")) {
+			currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+		}else{
+			PlayerPrefs.SetInt("CurrentLevel", 0);
+			currentLevel = 0;
+		}
+
 		answers = new List<string>();
-		//answers.Add("THE SIMPSONS");
-		//answers.Add("SOUTHPARK");
+		answers.Add("THE SIMPSONS");
 		answers.Add("ASTERIX & OBELIX");
+		answers.Add("SOUTH PARK");
+		answers.Add("THE SMURFS");
+		answers.Add("NINJA TURTLES");
+		answers.Add("LUCKY LUKE");
+		answers.Add("BERT & ERNIE");
+		answers.Add("DONALD DUCK");
 		
 		randomNumbers = new List<List<int>>();
 		randomNumbers.Add(randomNumbers1);
@@ -78,6 +95,9 @@ public class AnswersManager : MonoBehaviour
 		
 		PopulateAnswerPanel();
 		PopulateLettersPanel();
+
+		currentImage.sprite = images[currentLevel];
+		textCurrentLevel.text = (currentLevel + 1).ToString();
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,7 +196,10 @@ public class AnswersManager : MonoBehaviour
 			OnLetterButtonPressed();
 		}
 		if(CheckLevelIsFinished()){
-			Debug.Log("LEVEL COMPLETED");	
+			Debug.Log("LEVEL COMPLETED");
+			panelLevelCompleted.SetActive(true);
+			currentLevel++;
+			PlayerPrefs.SetInt("CurrentLevel", currentLevel);
 		}else{
 			SetNextIndex();
 		}
@@ -207,6 +230,21 @@ public class AnswersManager : MonoBehaviour
 			}
 		}
 		return correct;
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void OnNextButtonPressed()
+	{
+		Application.LoadLevel(Application.loadedLevel);
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void OnBackButtonPressed()
+	{
+		PlayerPrefs.DeleteAll();
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }
 

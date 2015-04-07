@@ -10,7 +10,7 @@ public class CustomImportSettings : AssetPostprocessor
 	{
 		TextureImporter textureImporter = assetImporter as TextureImporter;
 
-		//if(textureImporter.assetPath.Contains("Interface"))
+		if(textureImporter.assetPath.Contains("CharactersQuiz"))
 		{
 			textureImporter.textureType = TextureImporterType.Sprite;
 			textureImporter.textureFormat = TextureImporterFormat.AutomaticTruecolor;

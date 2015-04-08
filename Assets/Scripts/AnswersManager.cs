@@ -5,17 +5,6 @@ using UnityEngine.UI;
 
 public class AnswersManager : MonoBehaviour
 {
-	//THE SIMPSONS
-	//SOUTH PARK
-	//THE SMURFS
-	//NINJA TURTLES
-	//ASTERIX & OBELIX
-	//BERT & ERNIE
-	//DONALD DUCK
-	//STREET FIGHTER
-	//MARIO & LUIGI
-	//LUCKY LUKE
-	
 	public static AnswersManager instance;
 	
 	int currentLevel=0;				//Nivel actual del usuario
@@ -75,6 +64,7 @@ public class AnswersManager : MonoBehaviour
 
 		answers = new List<string>();
 		answers.Add("THE SIMPSONS");
+		answers.Add("INCRE - DIBLES");
 		answers.Add("ASTERIX & OBELIX");
 		answers.Add("SOUTH PARK");
 		answers.Add("THE SMURFS");
@@ -121,7 +111,13 @@ public class AnswersManager : MonoBehaviour
 			if(currentAnswer.Contains("&")){
 				FillOneLine(words[0]+" &", panelLettersTwoLines01);
 				FillOneLine(words[2], panelLettersTwoLines02);
-			}else{
+			}
+			//Caso especial para las respuestas que contienen "-"
+			else if(currentAnswer.Contains("-")){
+				FillOneLine(words[0]+"-", panelLettersTwoLines01);
+				FillOneLine(words[2], panelLettersTwoLines02);
+			}
+			else{
 				FillOneLine(words[0], panelLettersTwoLines01);
 				FillOneLine(words[1], panelLettersTwoLines02);
 			}
@@ -148,6 +144,9 @@ public class AnswersManager : MonoBehaviour
 				if(word[i]=='&'){
 					buttonLetter.transform.GetComponent<Button>().interactable=false;
 				}
+				else if(word[i]=='-'){
+					buttonLetter.transform.GetComponent<Button>().interactable=false;
+				}
 				//Las letras normales las ocultamos
 				else{	
 					ButtonLetterCtrl buttonLetterCtrl = buttonLetter.GetComponent<ButtonLetterCtrl>();
@@ -169,6 +168,7 @@ public class AnswersManager : MonoBehaviour
 	{
 		string cleanAnswer = currentAnswer.Replace(" ", "");
 		cleanAnswer = cleanAnswer.Replace("&", "");
+		cleanAnswer = cleanAnswer.Replace("-", "");
 		
 		//Cogemos aleatoriamente una de las 3 listas de numeros para colocar las letras en el panel
 		List<int> positions = randomNumbers[Random.Range(0,3)];

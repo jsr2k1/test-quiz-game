@@ -65,13 +65,14 @@ public class AnswersManager : MonoBehaviour
 		answers = new List<string>();
 		answers.Add("THE SIMPSONS");
 		answers.Add("INCRE - DIBLES");
-		answers.Add("ASTERIX & OBELIX");
 		answers.Add("SOUTH PARK");
 		answers.Add("THE SMURFS");
 		answers.Add("NINJA TURTLES");
 		answers.Add("LUCKY LUKE");
 		answers.Add("BERT & ERNIE");
 		answers.Add("DONALD DUCK");
+		answers.Add("ASTERIX & OBELIX");
+		answers.Add("TOM & JERRY");
 		
 		randomNumbers = new List<List<int>>();
 		randomNumbers.Add(randomNumbers1);
@@ -88,6 +89,27 @@ public class AnswersManager : MonoBehaviour
 
 		currentImage.sprite = images[currentLevel];
 		textCurrentLevel.text = (currentLevel + 1).ToString();
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	void Update()
+	{
+		//Go to next level
+		if(Input.GetKeyUp(KeyCode.N)){
+			PlayerPrefs.SetInt("CurrentLevel", currentLevel+1);
+			Application.LoadLevel(Application.loadedLevel);
+		}
+		//Go to previous level
+		if(Input.GetKeyUp(KeyCode.P)){
+			PlayerPrefs.SetInt("CurrentLevel", currentLevel-1);
+			Application.LoadLevel(Application.loadedLevel);
+		}
+		//Reset
+		if(Input.GetKeyUp(KeyCode.R)){
+			PlayerPrefs.SetInt("CurrentLevel", 0);
+			Application.LoadLevel(Application.loadedLevel);
+		}
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,15 +218,23 @@ public class AnswersManager : MonoBehaviour
 			OnLetterButtonPressed();
 		}
 		if(CheckLevelIsFinished()){
-			Debug.Log("LEVEL COMPLETED");
-			panelLevelCompleted.SetActive(true);
-			currentLevel++;
-			PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+			StartCoroutine(GotoNextLevel());
 		}else{
 			SetNextIndex();
 		}
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	IEnumerator GotoNextLevel()
+	{
+		yield return new WaitForSeconds(0.5f);
+		Debug.Log("LEVEL COMPLETED");
+		panelLevelCompleted.SetActive(true);
+		currentLevel++;
+		PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+	}
+							
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Miramos cual va a ser la siguiente letra que se tiene que rellenar
 	//Hay que ir con cuidado porque el usuario puede haver ido borrando letras y hay que rellenar los huecos
@@ -243,8 +273,7 @@ public class AnswersManager : MonoBehaviour
 	
 	public void OnBackButtonPressed()
 	{
-		PlayerPrefs.DeleteAll();
-		Application.LoadLevel(Application.loadedLevel);
+		
 	}
 }
 

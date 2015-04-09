@@ -39,10 +39,11 @@ public class AnswersManager : MonoBehaviour
 	public delegate void LetterButtonPressed();
 	public static event LetterButtonPressed OnLetterButtonPressed;
 
-	public GameObject panelLevelCompleted;
 	public Sprite[] images;
 	public Image currentImage;
 	public Text textCurrentLevel;
+
+	public LevelCompletedPanelCtrl levelCompletedPanelCtrl;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -228,9 +229,8 @@ public class AnswersManager : MonoBehaviour
 	
 	IEnumerator GotoNextLevel()
 	{
-		yield return new WaitForSeconds(0.5f);
-		Debug.Log("LEVEL COMPLETED");
-		panelLevelCompleted.SetActive(true);
+		yield return new WaitForSeconds(0.2f);
+		levelCompletedPanelCtrl.ShowPopUp();
 		currentLevel++;
 		PlayerPrefs.SetInt("CurrentLevel", currentLevel);
 	}

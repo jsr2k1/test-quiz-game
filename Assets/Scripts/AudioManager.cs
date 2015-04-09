@@ -1,0 +1,31 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class AudioManager : MonoBehaviour
+{
+	public static AudioManager instance;
+
+	public enum Audios{
+		LevelComplete,
+		Key
+	};
+
+	public AudioClip levelCompleteAudio;
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	void Awake()
+	{
+		instance = this;
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void PlayAudio(Audios audios)
+	{
+		if(audios == Audios.LevelComplete){
+			audio.clip = levelCompleteAudio;
+			audio.Play();
+		}
+	}
+}

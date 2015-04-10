@@ -67,6 +67,7 @@ public class ButtonLetterCtrl : MonoBehaviour
 		text.text = "";
 		buttonPanelCtrl.SetLetterEnable();
 		AnswersManager.instance.SetNextIndex();
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClickAlt);
 	}
 }
 

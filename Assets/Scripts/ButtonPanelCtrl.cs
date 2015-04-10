@@ -27,6 +27,7 @@ public class ButtonPanelCtrl : MonoBehaviour
 		text.enabled = false;
 		
 		AnswersManager.instance.SetLetter(text.text, this);
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

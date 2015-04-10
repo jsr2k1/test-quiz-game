@@ -7,14 +7,13 @@ public class AnswersManager : MonoBehaviour
 {
 	public static AnswersManager instance;
 	
-	int currentLevel=0;				//Nivel actual del usuario
+	int currentLevel;				//Nivel actual del usuario
 	int nextIndex=0;				//Vamos numerando las letras de la respuesta para poder rellenarlas despues
 	public int currentIndex;		//Indice de la letra siguiente a rellenar
 	public string currentLetter;	//Letra siguiente a rellenar
 	public ButtonPanelCtrl currentButtonPanelCtrl;		//Ultimo boton pulsado del panel de letras
 	List<ButtonLetterCtrl> listButtonLetterCtrl;		//Lista para recorrer y buscar posibles huecos
 	
-	List<string> answers;
 	const int totalLettersPanel=14;
 	
 	public GameObject panelLettersOneLine;
@@ -39,7 +38,7 @@ public class AnswersManager : MonoBehaviour
 	public delegate void LetterButtonPressed();
 	public static event LetterButtonPressed OnLetterButtonPressed;
 
-	public Sprite[] images;
+	//public Sprite[] images;
 	public Image currentImage;
 	public Text textCurrentLevel;
 
@@ -59,22 +58,10 @@ public class AnswersManager : MonoBehaviour
 		if(PlayerPrefs.HasKey("CurrentLevel")) {
 			currentLevel = PlayerPrefs.GetInt("CurrentLevel");
 		}else{
-			PlayerPrefs.SetInt("CurrentLevel", 0);
-			currentLevel = 0;
+			PlayerPrefs.SetInt("CurrentLevel", 1);
+			currentLevel = 1;
 		}
 
-		answers = new List<string>();
-		answers.Add("THE SIMPSONS");
-		answers.Add("INCRE - DIBLES");
-		answers.Add("SOUTH PARK");
-		answers.Add("THE SMURFS");
-		answers.Add("NINJA TURTLES");
-		answers.Add("LUCKY LUKE");
-		answers.Add("BERT & ERNIE");
-		answers.Add("DONALD DUCK");
-		answers.Add("ASTERIX & OBELIX");
-		answers.Add("TOM & JERRY");
-		
 		randomNumbers = new List<List<int>>();
 		randomNumbers.Add(randomNumbers1);
 		randomNumbers.Add(randomNumbers2);
@@ -82,14 +69,15 @@ public class AnswersManager : MonoBehaviour
 		
 		listButtonLetterCtrl = new List<ButtonLetterCtrl>();
 		
-		currentAnswer = answers[currentLevel];
+		string id = "id_answer_" + currentLevel.ToString("000");
+		currentAnswer = LanguageManager.GetText(id);
 		words = currentAnswer.Split(' ');
 		
 		PopulateAnswerPanel();
 		PopulateLettersPanel();
 
-		currentImage.sprite = images[currentLevel];
-		textCurrentLevel.text = (currentLevel + 1).ToString();
+		currentImage.sprite = Resources.Load<Sprite>("Characters/"+currentLevel.ToString("000"));
+		textCurrentLevel.text = currentLevel.ToString();
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +96,7 @@ public class AnswersManager : MonoBehaviour
 		}
 		//Reset
 		if(Input.GetKeyUp(KeyCode.R)){
-			PlayerPrefs.SetInt("CurrentLevel", 0);
+			PlayerPrefs.SetInt("CurrentLevel", 1);
 			Application.LoadLevel(Application.loadedLevel);
 		}
 	}
@@ -267,13 +255,15 @@ public class AnswersManager : MonoBehaviour
 	public void OnNextButtonPressed()
 	{
 		Application.LoadLevel(Application.loadedLevel);
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void OnBackButtonPressed()
 	{
-		
+		Application.LoadLevel("01 Main");
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 	}
 }
 

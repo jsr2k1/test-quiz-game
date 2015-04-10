@@ -7,16 +7,20 @@ public class AudioManager : MonoBehaviour
 
 	public enum Audios{
 		LevelComplete,
-		Key
+		ButtonClick,
+		ButtonClickAlt
 	};
 
 	public AudioClip levelCompleteAudio;
+	public AudioClip buttonClick;
+	public AudioClip buttonClickAlt;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	void Awake()
 	{
 		instance = this;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,8 +28,17 @@ public class AudioManager : MonoBehaviour
 	public void PlayAudio(Audios audios)
 	{
 		if(audios == Audios.LevelComplete){
+			audio.volume = 1.0f;
 			audio.clip = levelCompleteAudio;
-			audio.Play();
 		}
+		if(audios == Audios.ButtonClick){
+			audio.volume = 0.2f;
+			audio.clip = buttonClick;
+		}
+		if(audios == Audios.ButtonClickAlt){
+			audio.volume = 0.2f;
+			audio.clip = buttonClickAlt;
+		}
+		audio.Play();
 	}
 }

@@ -63,6 +63,9 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_009", new string[] {"LUCKY LUKE", "LUCKY LUKE"});
 		dict.Add("id_answer_010", new string[] {"SOUTH PARK", "SOUTH PARK"});
 		dict.Add("id_answer_011", new string[] {"TOM & JERRY", "TOM & JERRY"});
+		dict.Add("id_answer_012", new string[] {"BATMAN & ROBIN", "BATMAN & ROBIN"});
+		dict.Add("id_answer_013", new string[] {"LOS HOBBITS", "THE HOBBITS"});
+		dict.Add("id_answer_014", new string[] {"TOTORO", "TOTORO"});
 	}
 }
 

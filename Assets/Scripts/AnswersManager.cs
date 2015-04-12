@@ -7,7 +7,7 @@ public class AnswersManager : MonoBehaviour
 {
 	public static AnswersManager instance;
 	
-	int currentLevel;				//Nivel actual del usuario
+	public int currentLevel;				//Nivel actual del usuario
 	int nextIndex=0;				//Vamos numerando las letras de la respuesta para poder rellenarlas despues
 	public int currentIndex;		//Indice de la letra siguiente a rellenar
 	public string currentLetter;	//Letra siguiente a rellenar
@@ -248,22 +248,6 @@ public class AnswersManager : MonoBehaviour
 			}
 		}
 		return correct;
-	}
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public void OnNextButtonPressed()
-	{
-		Application.LoadLevel(Application.loadedLevel);
-		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void OnBackButtonPressed()
-	{
-		Application.LoadLevel("01 Main");
-		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 	}
 }
 

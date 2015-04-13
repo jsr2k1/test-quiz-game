@@ -32,11 +32,11 @@ public class AudioManager : MonoBehaviour
 			audio.clip = levelCompleteAudio;
 		}
 		if(audios == Audios.ButtonClick){
-			audio.volume = 0.2f;
+			audio.volume = 0.5f;
 			audio.clip = buttonClick;
 		}
 		if(audios == Audios.ButtonClickAlt){
-			audio.volume = 0.2f;
+			audio.volume = 0.5f;
 			audio.clip = buttonClickAlt;
 		}
 		audio.Play();

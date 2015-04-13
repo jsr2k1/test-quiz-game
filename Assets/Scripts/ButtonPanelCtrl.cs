@@ -25,9 +25,17 @@ public class ButtonPanelCtrl : MonoBehaviour
 		button.enabled = false;
 		image.enabled = false;
 		text.enabled = false;
-		
-		AnswersManager.instance.SetLetter(text.text, this);
+
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		StartCoroutine(SetLetter());
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Nos esperamos un frame para que el audio no suene con retraso
+	IEnumerator SetLetter()
+	{
+		yield return null;
+		AnswersManager.instance.SetLetter(text.text, this);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

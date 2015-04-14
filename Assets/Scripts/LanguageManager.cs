@@ -68,6 +68,7 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_014", new string[] {"LOS HOBBITS", "THE HOBBITS"});
 		dict.Add("id_answer_015", new string[] {"TOTORO", "TOTORO"});
 		dict.Add("id_answer_016", new string[] {"STAR WARS", "STAR WARS"});
+		dict.Add("id_answer_017", new string[] {"TARZAN", "TARZAN"});
 	}
 }
 

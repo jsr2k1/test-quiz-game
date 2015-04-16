@@ -33,6 +33,7 @@ public class AnswersManager : MonoBehaviour
 	
 	string currentAnswer;
 	string[] words;
+	public Text textCategory;
 	
 	//Creamos un evento para avisar a las letras de la respuesta que un boton letra ha sido pulsado
 	public delegate void LetterButtonPressed();
@@ -72,6 +73,7 @@ public class AnswersManager : MonoBehaviour
 		string id = "id_answer_" + currentLevel.ToString("000");
 		currentAnswer = LanguageManager.GetText(id);
 		words = currentAnswer.Split(' ');
+		textCategory.text = LanguageManager.GetCategory(id);
 		
 		PopulateAnswerPanel();
 		PopulateLettersPanel();

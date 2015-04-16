@@ -6,9 +6,7 @@ using System.Collections;
 public class ButtonLetterCtrl : MonoBehaviour
 {
 	public int index;
-	
-	//Button button;
-	//Image image;
+
 	public Text text;
 	ButtonPanelCtrl buttonPanelCtrl;		//Letra del panel que se ha pulsado (linkamos para poder colocarla si el usuario la borra)
 	string answer;
@@ -17,8 +15,6 @@ public class ButtonLetterCtrl : MonoBehaviour
 	
 	void Awake()
 	{
-		//button = GetComponent<Button>();
-		//image = GetComponent<Image>();
 		text = transform.GetChild(0).GetComponent<Text>();
 	}
 	

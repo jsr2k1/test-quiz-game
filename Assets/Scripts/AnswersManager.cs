@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class AnswersManager : MonoBehaviour
 {
 	public static AnswersManager instance;
-	
-	public int currentLevel;				//Nivel actual del usuario
-	int nextIndex=0;				//Vamos numerando las letras de la respuesta para poder rellenarlas despues
-	public int currentIndex;		//Indice de la letra siguiente a rellenar
-	public string currentLetter;	//Letra siguiente a rellenar
+
+	public int maxLevel;								//Numero de niveles totales
+	public int currentLevel;							//Nivel actual del usuario
+	int nextIndex=0;									//Vamos numerando las letras de la respuesta para poder rellenarlas despues
+	public bool bFullAnswer;									//Se han rellenado todas las letras de la respuesta
+	public int currentIndex;							//Indice de la letra siguiente a rellenar
+	public string currentLetter;						//Letra siguiente a rellenar
 	public ButtonPanelCtrl currentButtonPanelCtrl;		//Ultimo boton pulsado del panel de letras
 	List<ButtonLetterCtrl> listButtonLetterCtrl;		//Lista para recorrer y buscar posibles huecos
 	
@@ -81,7 +83,7 @@ public class AnswersManager : MonoBehaviour
 		currentImage.sprite = Resources.Load<Sprite>("Characters/"+currentLevel.ToString("000"));
 		textCurrentLevel.text = currentLevel.ToString();
 	}
-	
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	void Update()
@@ -202,6 +204,9 @@ public class AnswersManager : MonoBehaviour
 	//Colocamos la letra que ha pulsado el usuario en la posicion que corresponda
 	public void SetLetter(string letter, ButtonPanelCtrl buttonPanelCtrl)
 	{
+		if(bFullAnswer){
+			return;
+		}
 		currentLetter = letter;
 		currentButtonPanelCtrl = buttonPanelCtrl;
 		
@@ -222,6 +227,9 @@ public class AnswersManager : MonoBehaviour
 		yield return new WaitForSeconds(0.2f);
 		levelCompletedPanelCtrl.ShowPopUp();
 		currentLevel++;
+		if(currentLevel > maxLevel){
+			currentLevel = 1;
+		}
 		PlayerPrefs.SetInt("CurrentLevel", currentLevel);
 	}
 							
@@ -230,12 +238,15 @@ public class AnswersManager : MonoBehaviour
 	//Hay que ir con cuidado porque el usuario puede haver ido borrando letras y hay que rellenar los huecos
 	public void SetNextIndex()
 	{
+		bFullAnswer = false;
+
 		foreach(ButtonLetterCtrl buttonLetterCtrl in listButtonLetterCtrl){
 			if(buttonLetterCtrl.text.text==""){
 				currentIndex = buttonLetterCtrl.index;
-				break;
+				return;
 			}
 		}
+		bFullAnswer = true;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

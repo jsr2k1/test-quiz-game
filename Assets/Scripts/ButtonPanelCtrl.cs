@@ -22,12 +22,14 @@ public class ButtonPanelCtrl : MonoBehaviour
 	
 	public void OnButtonPressed()
 	{
-		button.enabled = false;
-		image.enabled = false;
-		text.enabled = false;
+		if(!AnswersManager.instance.bFullAnswer){
+			button.enabled = false;
+			image.enabled = false;
+			text.enabled = false;
 
-		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		StartCoroutine(SetLetter());
+			AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+			StartCoroutine(SetLetter());
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

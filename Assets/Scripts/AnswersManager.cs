@@ -10,11 +10,12 @@ public class AnswersManager : MonoBehaviour
 	public int maxLevel;								//Numero de niveles totales
 	public int currentLevel;							//Nivel actual del usuario
 	int nextIndex=0;									//Vamos numerando las letras de la respuesta para poder rellenarlas despues
-	public bool bFullAnswer;									//Se han rellenado todas las letras de la respuesta
+	public bool bFullAnswer;							//Se han rellenado todas las letras de la respuesta
 	public int currentIndex;							//Indice de la letra siguiente a rellenar
 	public string currentLetter;						//Letra siguiente a rellenar
 	public ButtonPanelCtrl currentButtonPanelCtrl;		//Ultimo boton pulsado del panel de letras
 	List<ButtonLetterCtrl> listButtonLetterCtrl;		//Lista para recorrer y buscar posibles huecos
+	List<ButtonPanelCtrl> listButtonPanelCtrl;			//Lista para recorrer y resolver letras
 	
 	const int totalLettersPanel=14;
 	
@@ -64,13 +65,15 @@ public class AnswersManager : MonoBehaviour
 			PlayerPrefs.SetInt("CurrentLevel", 1);
 			currentLevel = 1;
 		}
-
 		randomNumbers = new List<List<int>>();
 		randomNumbers.Add(randomNumbers1);
 		randomNumbers.Add(randomNumbers2);
 		randomNumbers.Add(randomNumbers3);
 		
 		listButtonLetterCtrl = new List<ButtonLetterCtrl>();
+		listButtonPanelCtrl = new List<ButtonPanelCtrl>();
+		
+		FillListButtonPanelCtrl();
 		
 		string id = "id_answer_" + currentLevel.ToString("000");
 		currentAnswer = LanguageManager.GetText(id);
@@ -82,6 +85,16 @@ public class AnswersManager : MonoBehaviour
 
 		currentImage.sprite = Resources.Load<Sprite>("Characters/"+currentLevel.ToString("000"));
 		textCurrentLevel.text = currentLevel.ToString();
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	void FillListButtonPanelCtrl()
+	{
+		ButtonPanelCtrl[] array = panelButtons.GetComponentsInChildren<ButtonPanelCtrl>();
+		foreach(ButtonPanelCtrl buttonPanelCtrl in array){
+			listButtonPanelCtrl.Add(buttonPanelCtrl);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,14 +164,15 @@ public class AnswersManager : MonoBehaviour
 				buttonLetter = Instantiate(buttonSpacePrefab) as GameObject;
 			}
 			else{
-				//Si es un "&" lo mostramos
 				buttonLetter = Instantiate(buttonLetterAnswerPrefab) as GameObject;
 				Text text = buttonLetter.transform.GetChild(0).GetComponent<Text>();
 				text.text = word[i].ToString();
 				
+				//Si es un "&" lo mostramos
 				if(word[i]=='&'){
 					buttonLetter.transform.GetComponent<Button>().interactable=false;
 				}
+				//Si es un "-" lo mostramos
 				else if(word[i]=='-'){
 					buttonLetter.transform.GetComponent<Button>().interactable=false;
 				}
@@ -262,7 +276,83 @@ public class AnswersManager : MonoBehaviour
 		}
 		return correct;
 	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Resuelve una de las letras de la solucion
+	public void SolveOneLetter()
+	{
+		List<int> listEmpty = new List<int>();
+		List<int> listUser = new List<int>();
+		int index=0;
+		
+		for(int i=0;i<listButtonLetterCtrl.Count;i++){
+			if(listButtonLetterCtrl[i].text.text==""){
+				listEmpty.Add(i);
+			}
+			else if(!listButtonLetterCtrl[i].bCorrect){
+				listUser.Add(i);
+			}
+		}
+		//Si no hay letras vacias -> random con todas las que ha puesto el usuario y rellenar una
+		if(listEmpty.Count==0){
+			int randomIndex = Random.Range(0, listUser.Count);
+			index = listUser[randomIndex];
+			//Si la letra sustituida era incorrecta, hay que volver a mostrar la del panel
+			if(!listButtonLetterCtrl[index].isCorrect()){
+				listButtonLetterCtrl[index].buttonPanelCtrl.ShowButton();
+			}
+			listButtonLetterCtrl[index].SetCorrectText();
+			HideLetterInPanel(listButtonLetterCtrl[index].answer);
+		}
+		//Si hay 1 letras vacia -> rellenamos esa
+		else if(listEmpty.Count==1){
+			index = listEmpty[0];
+			listButtonLetterCtrl[index].SetCorrectText();
+			HideLetterInPanel(listButtonLetterCtrl[index].answer);
+		}
+		//Si hay mas de una letra vacia -> random y rellenar una
+		else{
+			int randomIndex = Random.Range(0, listEmpty.Count);
+			index = listEmpty[randomIndex];
+			listButtonLetterCtrl[index].SetCorrectText();
+			HideLetterInPanel(listButtonLetterCtrl[index].answer);
+		}
+		
+		if(CheckLevelIsFinished()){
+			StartCoroutine(GotoNextLevel());
+		}else{
+			SetNextIndex();
+		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Oculta una de las letras del panel ya que se ha pulsado el boton de resolver una letra
+	void HideLetterInPanel(string s)
+	{
+		foreach(ButtonPanelCtrl buttonPanelCtrl in listButtonPanelCtrl){
+			if(buttonPanelCtrl.text.text == s && !buttonPanelCtrl.bHide){
+				buttonPanelCtrl.HideButton();
+				return;
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

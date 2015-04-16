@@ -8,8 +8,9 @@ public class ButtonLetterCtrl : MonoBehaviour
 	public int index;
 
 	public Text text;
-	ButtonPanelCtrl buttonPanelCtrl;		//Letra del panel que se ha pulsado (linkamos para poder colocarla si el usuario la borra)
-	string answer;
+	public ButtonPanelCtrl buttonPanelCtrl;		//Letra del panel que se ha pulsado (linkamos para poder colocarla si el usuario la borra)
+	public string answer;						//Letra que corresponde a la respuesta correcta
+	public bool bCorrect;						//true si se ha forzado la respuesta pulsando el boton
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -23,6 +24,22 @@ public class ButtonLetterCtrl : MonoBehaviour
 	public void SetAnswer(string s)
 	{
 		answer = s;
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void SetCorrectText()
+	{
+		text.text = answer;
+		bCorrect = true;
+		text.color = Color.green;
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public bool isCorrect()
+	{
+		return answer == text.text;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,10 +77,12 @@ public class ButtonLetterCtrl : MonoBehaviour
 	//Si se pulsa una letra de la respuesta hay que quitar esa letra y volverla a poner en el panel
 	public void OnButtonPressed()
 	{
-		text.text = "";
-		buttonPanelCtrl.SetLetterEnable();
-		AnswersManager.instance.SetNextIndex();
-		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClickAlt);
+		if(!bCorrect && buttonPanelCtrl!=null){
+			text.text = "";
+			buttonPanelCtrl.SetLetterEnable();
+			AnswersManager.instance.SetNextIndex();
+			AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClickAlt);
+		}
 	}
 }
 

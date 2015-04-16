@@ -7,7 +7,8 @@ public class ButtonPanelCtrl : MonoBehaviour
 {
 	Button button;
 	Image image;
-	Text text;
+	public Text text;
+	public bool bHide;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -23,13 +24,30 @@ public class ButtonPanelCtrl : MonoBehaviour
 	public void OnButtonPressed()
 	{
 		if(!AnswersManager.instance.bFullAnswer){
-			button.enabled = false;
-			image.enabled = false;
-			text.enabled = false;
-
+			HideButton();
 			AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 			StartCoroutine(SetLetter());
 		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void HideButton()
+	{
+		button.enabled = false;
+		image.enabled = false;
+		text.enabled = false;
+		bHide = true;
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void ShowButton()
+	{
+		button.enabled = true;
+		image.enabled = true;
+		text.enabled = true;
+		bHide = false;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

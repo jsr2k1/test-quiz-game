@@ -289,7 +289,7 @@ public class AnswersManager : MonoBehaviour
 			if(listButtonLetterCtrl[i].text.text==""){
 				listEmpty.Add(i);
 			}
-			else if(!listButtonLetterCtrl[i].bCorrect){
+			else if(!listButtonLetterCtrl[i].bCorrectForced){
 				listUser.Add(i);
 			}
 		}
@@ -300,9 +300,10 @@ public class AnswersManager : MonoBehaviour
 			//Si la letra sustituida era incorrecta, hay que volver a mostrar la del panel
 			if(!listButtonLetterCtrl[index].isCorrect()){
 				listButtonLetterCtrl[index].buttonPanelCtrl.ShowButton();
+				HideLetterInPanel(listButtonLetterCtrl[index].answer);
 			}
 			listButtonLetterCtrl[index].SetCorrectText();
-			HideLetterInPanel(listButtonLetterCtrl[index].answer);
+			
 		}
 		//Si hay 1 letras vacia -> rellenamos esa
 		else if(listEmpty.Count==1){
@@ -332,6 +333,14 @@ public class AnswersManager : MonoBehaviour
 		foreach(ButtonPanelCtrl buttonPanelCtrl in listButtonPanelCtrl){
 			if(buttonPanelCtrl.text.text == s && !buttonPanelCtrl.bHide){
 				buttonPanelCtrl.HideButton();
+				return;
+			}
+		}
+		//Si no encuentra ninguna letra para ocultar en el panel, eso significa que hay alguna letra mal puesta en la respuesta
+		//En ese caso, hay que quitar la letra de la respuesta
+		foreach(ButtonLetterCtrl buttonLetterCtrl in listButtonLetterCtrl){
+			if(buttonLetterCtrl.text.text==s && !buttonLetterCtrl.isCorrect()){
+				buttonLetterCtrl.text.text="";
 				return;
 			}
 		}

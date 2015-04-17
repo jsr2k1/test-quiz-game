@@ -10,7 +10,7 @@ public class ButtonLetterCtrl : MonoBehaviour
 	public Text text;
 	public ButtonPanelCtrl buttonPanelCtrl;		//Letra del panel que se ha pulsado (linkamos para poder colocarla si el usuario la borra)
 	public string answer;						//Letra que corresponde a la respuesta correcta
-	public bool bCorrect;						//true si se ha forzado la respuesta pulsando el boton
+	public bool bCorrectForced;					//true si se ha forzado la respuesta pulsando el boton de resolver letra
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -20,18 +20,18 @@ public class ButtonLetterCtrl : MonoBehaviour
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	//Al crear la letra en la respuesta
 	public void SetAnswer(string s)
 	{
 		answer = s;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	//Se ha pulsado el boton de resolver una letra
 	public void SetCorrectText()
 	{
 		text.text = answer;
-		bCorrect = true;
+		bCorrectForced = true;
 		text.color = Color.green;
 	}
 	
@@ -77,7 +77,7 @@ public class ButtonLetterCtrl : MonoBehaviour
 	//Si se pulsa una letra de la respuesta hay que quitar esa letra y volverla a poner en el panel
 	public void OnButtonPressed()
 	{
-		if(!bCorrect && buttonPanelCtrl!=null){
+		if(!bCorrectForced && buttonPanelCtrl!=null){
 			text.text = "";
 			buttonPanelCtrl.SetLetterEnable();
 			AnswersManager.instance.SetNextIndex();

@@ -21,7 +21,7 @@ public class ButtonsManager : MonoBehaviour
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//COINS (02 GameScene) 
 	//De momento, lo uso para pasar directamente al siguiente nivel
-	public void OnButtonCoinsPressed()
+	public void OnButtonDebugNextLevelPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 		PlayerPrefs.SetInt("CurrentLevel", AnswersManager.instance.currentLevel+1);
@@ -57,7 +57,7 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonFacebookPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		
+		//TODO: Colgar una pregunta a los amigos de Facebook
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

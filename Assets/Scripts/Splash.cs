@@ -9,11 +9,14 @@ public class Splash : MonoBehaviour
 	
 	void Awake()
 	{
-		if(PlayerPrefs.HasKey("Coins")==false){
-			PlayerPrefs.SetInt("Coins", 300);
-		}
 		if(!PlayerPrefs.HasKey("CurrentLevel")){
-			PlayerPrefs.SetInt("CurrentLevel", 0);
+			PlayerPrefs.SetInt("CurrentLevel", 1);
+		}
+		if(!PlayerPrefs.HasKey("Coins")){
+			PlayerPrefs.SetInt("Coins", 9000);
+		}
+		if(!PlayerPrefs.HasKey("SolveLetters")){
+			PlayerPrefs.SetInt("SolveLetters", 20);
 		}
 		StartCoroutine("DisplayScene");
 	}

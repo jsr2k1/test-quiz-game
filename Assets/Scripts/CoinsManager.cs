@@ -4,15 +4,24 @@ using System.Collections;
 
 public class CoinsManager : MonoBehaviour
 {
-	int coins;
-	public Text text;
+	public static CoinsManager instance;
+	public int coins;
+	public int solveLetters;
+	public Text textCoins;
+	public Text textSolveLetters;
+	//int priceLetter = 50;
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	void Awake()
 	{
+		instance = this;
+	
 		coins = PlayerPrefs.GetInt("Coins");
-		text.text = coins.ToString();
+		textCoins.text = coins.ToString();
+		
+		solveLetters = PlayerPrefs.GetInt("SolveLetters");
+		textSolveLetters.text = solveLetters.ToString();
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,5 +29,22 @@ public class CoinsManager : MonoBehaviour
 	public void OnButtonCoinsPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//SOLVE LETTER (02 GameScene)
+	public void OnButtonSolveLetterPressed()
+	{
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		
+		if(solveLetters>0){
+			solveLetters--;
+			PlayerPrefs.SetInt("SolveLetters", solveLetters);
+			textSolveLetters.text = solveLetters.ToString();
+			
+			AnswersManager.instance.SolveOneLetter();
+		}else{
+			//TODO:Mostrar popup de conseguir monedas
+		}
 	}
 }

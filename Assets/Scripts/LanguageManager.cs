@@ -129,6 +129,9 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_015", new DictEntry(Categories.ANIMATION, "TOTORO", "TOTORO"));
 		dict.Add("id_answer_016", new DictEntry(Categories.MOVIES_AND_TV, "STAR WARS", "STAR WARS"));
 		dict.Add("id_answer_017", new DictEntry(Categories.MOVIES_AND_TV, "TARZAN", "TARZAN"));
+		dict.Add("id_answer_018", new DictEntry(Categories.CARTOONS, "BOB ESPONJA", "SPONGEBOB"));
+		dict.Add("id_answer_019", new DictEntry(Categories.CARTOONS, "MICKEY MOUSE", "MICKEY MOUSE"));
+		dict.Add("id_answer_020", new DictEntry(Categories.CARTOONS, "MONSTRUOS SA", "MONSTERS INC"));
 	}
 }
 

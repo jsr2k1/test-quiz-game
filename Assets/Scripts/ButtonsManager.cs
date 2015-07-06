@@ -23,8 +23,10 @@ public class ButtonsManager : MonoBehaviour
 	//De momento, lo uso para pasar directamente al siguiente nivel
 	public void OnButtonDebugNextLevelPressed()
 	{
+		int maxLevel = AnswersManager.instance.maxLevel;
+		int currentLevel = AnswersManager.instance.currentLevel;
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		PlayerPrefs.SetInt("CurrentLevel", AnswersManager.instance.currentLevel+1);
+		PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
 		StartCoroutine(DoLoadLevel("02 GameScene"));
 	}
 	

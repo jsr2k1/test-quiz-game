@@ -103,12 +103,12 @@ public class AnswersManager : MonoBehaviour
 	{
 		//Go to next level
 		if(Input.GetKeyUp(KeyCode.N)){
-			PlayerPrefs.SetInt("CurrentLevel", currentLevel+1);
+			PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
 			Application.LoadLevel(Application.loadedLevel);
 		}
 		//Go to previous level
 		if(Input.GetKeyUp(KeyCode.P)){
-			PlayerPrefs.SetInt("CurrentLevel", currentLevel-1);
+			PlayerPrefs.SetInt("CurrentLevel", currentLevel>1 ? currentLevel-1 : maxLevel);
 			Application.LoadLevel(Application.loadedLevel);
 		}
 		//Reset
@@ -236,7 +236,7 @@ public class AnswersManager : MonoBehaviour
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	IEnumerator GotoNextLevel()
+	public IEnumerator GotoNextLevel()
 	{
 		yield return new WaitForSeconds(0.2f);
 		levelCompletedPanelCtrl.ShowPopUp();

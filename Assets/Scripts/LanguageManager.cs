@@ -119,7 +119,7 @@ public class LanguageManager : MonoBehaviour
 		
 		//Respuestas
 		dict.Add("id_answer_001", new DictEntry(Categories.CARTOONS, "LOS SIMPSON", "THE SIMPSONS"));
-		dict.Add("id_answer_002", new DictEntry(Categories.ANIMATION, "INCRE - IBLES", "INCRE - DIBLES"));
+		dict.Add("id_answer_002", new DictEntry(Categories.ANIMATION, "LOS INCREIBLES", "INCRE - DIBLES"));
 		dict.Add("id_answer_003", new DictEntry(Categories.CARTOONS, "TORTUGAS NINJA", "NINJA TURTLES"));
 		dict.Add("id_answer_004", new DictEntry(Categories.CARTOONS, "LOS PITUFOS", "THE SMURFS"));
 		dict.Add("id_answer_005", new DictEntry(Categories.VIDEOGAMES, "MARIO & LUIGI", "MARIO & LUIGI"));
@@ -142,6 +142,10 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_022", new DictEntry(Categories.VIDEOGAMES, "STREET FIGHTER", "STREET FIGHTER"));
 		dict.Add("id_answer_023", new DictEntry(Categories.SUPERHEROES, "HULK", "HULK"));
 		dict.Add("id_answer_024", new DictEntry(Categories.VIDEOGAMES, "ZELDA", "ZELDA"));
+		dict.Add("id_answer_025", new DictEntry(Categories.VIDEOGAMES, "SONIC & TAILS", "SONIC & TAILS"));
+		dict.Add("id_answer_026", new DictEntry(Categories.VIDEOGAMES, "MEGAMAN", "MEGAMAN"));
+		dict.Add("id_answer_027", new DictEntry(Categories.ANIMATION, "WALL-E", "WALL-E"));
+		dict.Add("id_answer_028", new DictEntry(Categories.SUPERHEROES, "4 FANTASTICOS", "FANTASTIC FOUR"));
 	}
 }
 

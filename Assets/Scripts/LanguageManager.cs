@@ -149,6 +149,7 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_029", new DictEntry(Categories.CARTOONS, "LOS PICAPIEDRA", "THE FLINTSTONES"));
 		dict.Add("id_answer_030", new DictEntry(Categories.ANIMATION, "LOS MINIONS", "MINIONS"));
 		dict.Add("id_answer_031", new DictEntry(Categories.ANIMATION, "GRU", "GRU"));
+		dict.Add("id_answer_032", new DictEntry(Categories.ANIMATION, "TOY STORY", "TOY STORY"));
 	}
 }
 

@@ -44,7 +44,7 @@ public class CoinsManager : MonoBehaviour
 			
 			AnswersManager.instance.SolveOneLetter();
 		}else{
-			//TODO:Mostrar popup de conseguir monedas
+			//TODO: Mostrar popup de conseguir monedas
 		}
 	}
 }

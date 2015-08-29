@@ -16,6 +16,7 @@ public class ButtonsManager : MonoBehaviour
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 		PlayerPrefs.SetInt("CurrentLevel", 1);
+		PlayerPrefs.SetInt("SolveLetters", 50);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,6 +28,18 @@ public class ButtonsManager : MonoBehaviour
 		int currentLevel = AnswersManager.instance.currentLevel;
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 		PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
+		StartCoroutine(DoLoadLevel("02 GameScene"));
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//COINS (02 GameScene) 
+	//De momento, lo uso para pasar directamente al nivel anterior
+	public void OnButtonDebugPrevLevelPressed()
+	{
+		int maxLevel = AnswersManager.instance.maxLevel;
+		int currentLevel = AnswersManager.instance.currentLevel;
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		PlayerPrefs.SetInt("CurrentLevel", currentLevel>1 ? currentLevel-1 : maxLevel);
 		StartCoroutine(DoLoadLevel("02 GameScene"));
 	}
 	

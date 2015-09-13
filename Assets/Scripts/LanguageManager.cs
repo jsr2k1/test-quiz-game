@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 // www.utf8-chartable.de
 
@@ -23,8 +24,10 @@ public class DictEntry
 
 public class LanguageManager : MonoBehaviour
 {
-	static int lang;
-	static Dictionary<string, DictEntry> dict;
+	public static LanguageManager instance;
+	int lang;
+	Dictionary<string, DictEntry> dict;
+	public int numAnswers;
 
 	public enum Categories{
 		ANIMATION,
@@ -41,14 +44,16 @@ public class LanguageManager : MonoBehaviour
 	
 	void Awake()
 	{
+		instance = this;
 		DontDestroyOnLoad(gameObject);
 		dict = new Dictionary<string, DictEntry>();
 		fillDict();
+		numAnswers = dict.Count(o => o.Key.StartsWith("id_answer"));
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static string GetText(string id)
+	public string GetText(string id)
 	{
 		if(dict.ContainsKey(id)){
 			if(Application.systemLanguage == SystemLanguage.Spanish){
@@ -67,7 +72,7 @@ public class LanguageManager : MonoBehaviour
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public static string GetCategory(string id)
+	public string GetCategory(string id)
 	{
 		if(dict.ContainsKey(id)){
 			if(dict[id].category == Categories.ANIMATION){
@@ -160,18 +165,12 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_035", new DictEntry(Categories.COMICS, "SNOOPY", "PEANUTS"));
 		dict.Add("id_answer_036", new DictEntry(Categories.MANGA_ANIME, "LAS SUPERNENAS", "POWERPUFF GIRLS"));
 		dict.Add("id_answer_037", new DictEntry(Categories.MANGA_ANIME, "DRAGON BALL", "DRAGON BALL"));
+		dict.Add("id_answer_038", new DictEntry(Categories.MOVIES_AND_TV, "AVATAR", "AVATAR"));
+		dict.Add("id_answer_039", new DictEntry(Categories.CARTOONS, "POCOYO", "POCOYO"));
+		dict.Add("id_answer_040", new DictEntry(Categories.MOVIES_AND_TV, "CAZA - FANTASMAS", "GHOST - BUSTERS"));
+		dict.Add("id_answer_041", new DictEntry(Categories.MANGA_ANIME, "MAZINGUER Z", "MAZINGUER Z"));
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

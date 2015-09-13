@@ -59,6 +59,7 @@ public class AnswersManager : MonoBehaviour
 	
 	void Start()
 	{
+		maxLevel = LanguageManager.instance.numAnswers;
 		if(PlayerPrefs.HasKey("CurrentLevel")) {
 			currentLevel = PlayerPrefs.GetInt("CurrentLevel");
 		}else{
@@ -76,9 +77,9 @@ public class AnswersManager : MonoBehaviour
 		FillListButtonPanelCtrl();
 		
 		string id = "id_answer_" + currentLevel.ToString("000");
-		currentAnswer = LanguageManager.GetText(id);
+		currentAnswer = LanguageManager.instance.GetText(id);
 		words = currentAnswer.Split(' ');
-		textCategory.text = LanguageManager.GetCategory(id);
+		textCategory.text = LanguageManager.instance.GetCategory(id);
 		
 		PopulateAnswerPanel();
 		PopulateLettersPanel();

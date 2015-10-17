@@ -32,8 +32,8 @@ public class LanguageManager : MonoBehaviour
 	public enum Categories{
 		ANIMATION,
 		CARTOONS,
-		COMICS,
-		MOVIES_AND_TV,
+		TV,
+		MOVIES,
 		VIDEOGAMES,
 		SUPERHEROES,
 		MANGA_ANIME,
@@ -81,16 +81,16 @@ public class LanguageManager : MonoBehaviour
 			else if(dict[id].category == Categories.CARTOONS){
 				return GetText("id_cartoons");
 			}
-			else if(dict[id].category == Categories.COMICS){
+			else if(dict[id].category == Categories.TV){
 				return GetText("id_comics");
 			}
-			else if(dict[id].category == Categories.MOVIES_AND_TV){
+			else if(dict[id].category == Categories.MOVIES){
 				return GetText("id_movies");
 			}
 			else if(dict[id].category == Categories.VIDEOGAMES){
 				return GetText("id_videogames");
 			}
-			else if(dict[id].category == Categories.SUPERHEROES){
+			else if(dict[id].category == Categories.MOVIES){
 				return GetText("id_superheroes");
 			}
 			else if(dict[id].category == Categories.MANGA_ANIME){
@@ -133,42 +133,46 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_003", new DictEntry(Categories.CARTOONS, "TORTUGAS NINJA", "NINJA TURTLES"));
 		dict.Add("id_answer_004", new DictEntry(Categories.CARTOONS, "LOS PITUFOS", "THE SMURFS"));
 		dict.Add("id_answer_005", new DictEntry(Categories.VIDEOGAMES, "MARIO & LUIGI", "MARIO & LUIGI"));
-		dict.Add("id_answer_006", new DictEntry(Categories.COMICS, "ASTERIX & OBELIX", "ASTERIX & OBELIX"));
-		dict.Add("id_answer_007", new DictEntry(Categories.MOVIES_AND_TV, "EPI & BLAS", "BERT & ERNIE"));
+		dict.Add("id_answer_006", new DictEntry(Categories.TV, "ASTERIX & OBELIX", "ASTERIX & OBELIX"));
+		dict.Add("id_answer_007", new DictEntry(Categories.TV, "EPI & BLAS", "BERT & ERNIE"));
 		dict.Add("id_answer_008", new DictEntry(Categories.CARTOONS, "PATO DONALD", "DONALD DUCK"));
-		dict.Add("id_answer_009", new DictEntry(Categories.CARTOONS, "LUCKY LUKE", "LUCKY LUKE"));
+		dict.Add("id_answer_009", new DictEntry(Categories.TV, "LUCKY LUKE", "LUCKY LUKE"));
 		dict.Add("id_answer_010", new DictEntry(Categories.CARTOONS, "SOUTH PARK", "SOUTH PARK"));
 		dict.Add("id_answer_011", new DictEntry(Categories.CARTOONS, "TOM & JERRY", "TOM & JERRY"));
-		dict.Add("id_answer_012", new DictEntry(Categories.SUPERHEROES, "BATMAN & ROBIN", "BATMAN & ROBIN"));
-		dict.Add("id_answer_013", new DictEntry(Categories.SUPERHEROES, "JOKER", "JOKER"));
-		dict.Add("id_answer_014", new DictEntry(Categories.MOVIES_AND_TV, "LOS HOBBITS", "THE HOBBITS"));
-		dict.Add("id_answer_015", new DictEntry(Categories.MANGA_ANIME, "TOTORO", "TOTORO"));
-		dict.Add("id_answer_016", new DictEntry(Categories.MOVIES_AND_TV, "STAR WARS", "STAR WARS"));
-		dict.Add("id_answer_017", new DictEntry(Categories.MOVIES_AND_TV, "TARZAN", "TARZAN"));
+		dict.Add("id_answer_012", new DictEntry(Categories.MOVIES, "BATMAN & ROBIN", "BATMAN & ROBIN"));
+		dict.Add("id_answer_013", new DictEntry(Categories.MOVIES, "JOKER", "JOKER"));
+		dict.Add("id_answer_014", new DictEntry(Categories.MOVIES, "LOS HOBBITS", "THE HOBBITS"));
+		dict.Add("id_answer_015", new DictEntry(Categories.CARTOONS, "SCOOBY DOO", "SCOOBY DOO"));
+		dict.Add("id_answer_016", new DictEntry(Categories.MOVIES, "STAR WARS", "STAR WARS"));
+		dict.Add("id_answer_017", new DictEntry(Categories.MOVIES, "TARZAN", "TARZAN"));
 		dict.Add("id_answer_018", new DictEntry(Categories.CARTOONS, "BOB ESPONJA", "SPONGEBOB"));
 		dict.Add("id_answer_019", new DictEntry(Categories.CARTOONS, "MICKEY MOUSE", "MICKEY MOUSE"));
 		dict.Add("id_answer_020", new DictEntry(Categories.ANIMATION, "MONSTRUOS SA", "MONSTERS INC"));
-		dict.Add("id_answer_021", new DictEntry(Categories.SUPERHEROES, "SUPERMAN", "SUPERMAN"));
+		dict.Add("id_answer_021", new DictEntry(Categories.MOVIES, "SUPERMAN", "SUPERMAN"));
 		dict.Add("id_answer_022", new DictEntry(Categories.VIDEOGAMES, "STREET FIGHTER", "STREET FIGHTER"));
-		dict.Add("id_answer_023", new DictEntry(Categories.SUPERHEROES, "HULK", "HULK"));
+		dict.Add("id_answer_023", new DictEntry(Categories.MOVIES, "HULK", "HULK"));
 		dict.Add("id_answer_024", new DictEntry(Categories.VIDEOGAMES, "ZELDA", "ZELDA"));
 		dict.Add("id_answer_025", new DictEntry(Categories.VIDEOGAMES, "SONIC & TAILS", "SONIC & TAILS"));
 		dict.Add("id_answer_026", new DictEntry(Categories.VIDEOGAMES, "MEGAMAN", "MEGAMAN"));
 		dict.Add("id_answer_027", new DictEntry(Categories.ANIMATION, "WALL-E", "WALL-E"));
-		dict.Add("id_answer_028", new DictEntry(Categories.SUPERHEROES, "4 FANTASTICOS", "FANTASTIC FOUR"));
-		dict.Add("id_answer_029", new DictEntry(Categories.CARTOONS, "LOS PICAPIEDRA", "THE FLINTSTONES"));
+		dict.Add("id_answer_028", new DictEntry(Categories.MOVIES, "4 FANTASTICOS", "FANTASTIC FOUR"));
+		dict.Add("id_answer_029", new DictEntry(Categories.TV, "LOS PICAPIEDRA", "THE FLINTSTONES"));
 		dict.Add("id_answer_030", new DictEntry(Categories.ANIMATION, "LOS MINIONS", "MINIONS"));
 		dict.Add("id_answer_031", new DictEntry(Categories.ANIMATION, "GRU", "GRU"));
 		dict.Add("id_answer_032", new DictEntry(Categories.ANIMATION, "TOY STORY", "TOY STORY"));
 		dict.Add("id_answer_033", new DictEntry(Categories.ANIMATION, "FROZEN", "FROZEN"));
 		dict.Add("id_answer_034", new DictEntry(Categories.CARTOONS, "FINN & JAKE", "FINN & JAKE"));
-		dict.Add("id_answer_035", new DictEntry(Categories.COMICS, "SNOOPY", "PEANUTS"));
-		dict.Add("id_answer_036", new DictEntry(Categories.MANGA_ANIME, "LAS SUPERNENAS", "POWERPUFF GIRLS"));
-		dict.Add("id_answer_037", new DictEntry(Categories.MANGA_ANIME, "DRAGON BALL", "DRAGON BALL"));
-		dict.Add("id_answer_038", new DictEntry(Categories.MOVIES_AND_TV, "AVATAR", "AVATAR"));
-		dict.Add("id_answer_039", new DictEntry(Categories.CARTOONS, "POCOYO", "POCOYO"));
-		dict.Add("id_answer_040", new DictEntry(Categories.MOVIES_AND_TV, "CAZA - FANTASMAS", "GHOST - BUSTERS"));
-		dict.Add("id_answer_041", new DictEntry(Categories.MANGA_ANIME, "MAZINGUER Z", "MAZINGUER Z"));
+		dict.Add("id_answer_035", new DictEntry(Categories.TV, "SNOOPY", "PEANUTS"));
+		dict.Add("id_answer_036", new DictEntry(Categories.TV, "LAS SUPERNENAS", "POWERPUFF GIRLS"));
+		dict.Add("id_answer_037", new DictEntry(Categories.TV, "DRAGON BALL", "DRAGON BALL"));
+		dict.Add("id_answer_038", new DictEntry(Categories.MOVIES, "AVATAR", "AVATAR"));
+		dict.Add("id_answer_039", new DictEntry(Categories.TV, "POCOYO", "POCOYO"));
+		dict.Add("id_answer_040", new DictEntry(Categories.MOVIES, "CAZA - FANTASMAS", "GHOST - BUSTERS"));
+		dict.Add("id_answer_041", new DictEntry(Categories.TV, "MAZINGUER Z", "MAZINGUER Z"));
+		dict.Add("id_answer_042", new DictEntry(Categories.ANIMATION, "DEL REVES", "INSIDE OUT"));
+		dict.Add("id_answer_043", new DictEntry(Categories.ANIMATION, "SHREK", "SHREK"));
+		dict.Add("id_answer_044", new DictEntry(Categories.ANIMATION, "KUNGFU PANDA", "KUNGFU PANDA"));
+		dict.Add("id_answer_045", new DictEntry(Categories.TV, "PANTERA ROSA", "PINK PANTHER"));
 	}
 }
 

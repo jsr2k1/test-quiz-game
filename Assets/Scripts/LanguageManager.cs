@@ -35,8 +35,6 @@ public class LanguageManager : MonoBehaviour
 		TV,
 		MOVIES,
 		VIDEOGAMES,
-		SUPERHEROES,
-		MANGA_ANIME,
 		NULL
 	};
 
@@ -82,19 +80,13 @@ public class LanguageManager : MonoBehaviour
 				return GetText("id_cartoons");
 			}
 			else if(dict[id].category == Categories.TV){
-				return GetText("id_comics");
+				return GetText("id_tv");
 			}
 			else if(dict[id].category == Categories.MOVIES){
 				return GetText("id_movies");
 			}
 			else if(dict[id].category == Categories.VIDEOGAMES){
 				return GetText("id_videogames");
-			}
-			else if(dict[id].category == Categories.MOVIES){
-				return GetText("id_superheroes");
-			}
-			else if(dict[id].category == Categories.MANGA_ANIME){
-				return GetText("id_manga_anime");
 			}
 			else{
 				return "ERROR";
@@ -121,11 +113,9 @@ public class LanguageManager : MonoBehaviour
 		//Categorias
 		dict.Add("id_animation", new DictEntry(Categories.NULL, "ANIMACI\u00D3N", "ANIMATION"));
 		dict.Add("id_cartoons", new DictEntry(Categories.NULL, "DIBUJOS ANIMADOS", "CARTOONS"));
-		dict.Add("id_comics", new DictEntry(Categories.NULL, "COMICS", "COMICS"));
+		dict.Add("id_tv", new DictEntry(Categories.NULL, "TV", "TV"));
 		dict.Add("id_movies", new DictEntry(Categories.NULL, "CINE & TV", "MOVIES & TV"));
 		dict.Add("id_videogames", new DictEntry(Categories.NULL, "VIDEOJUEGOS", "VIDEOGAMES"));
-		dict.Add("id_superheroes", new DictEntry(Categories.NULL, "SUPERHEROES", "SUPERHEROES"));
-		dict.Add("id_manga_anime", new DictEntry(Categories.NULL, "MANGA & ANIME", "MANGA & ANIME"));
 		
 		//Respuestas
 		dict.Add("id_answer_001", new DictEntry(Categories.CARTOONS, "LOS SIMPSON", "THE SIMPSONS"));
@@ -173,6 +163,11 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_answer_043", new DictEntry(Categories.ANIMATION, "SHREK", "SHREK"));
 		dict.Add("id_answer_044", new DictEntry(Categories.ANIMATION, "KUNGFU PANDA", "KUNGFU PANDA"));
 		dict.Add("id_answer_045", new DictEntry(Categories.TV, "PANTERA ROSA", "PINK PANTHER"));
+		dict.Add("id_answer_046", new DictEntry(Categories.VIDEOGAMES, "ANGRY BIRDS", "ANGRY BIRDS"));
+		dict.Add("id_answer_047", new DictEntry(Categories.VIDEOGAMES, "PUZZLE BOBBLE", "PUZZLE BOBBLE"));
+		dict.Add("id_answer_048", new DictEntry(Categories.VIDEOGAMES, "PAC MAN", "PAC MAN"));
+		dict.Add("id_answer_049", new DictEntry(Categories.VIDEOGAMES, "DONKEY KONG", "DONKEY KONG"));
+		dict.Add("id_answer_050", new DictEntry(Categories.VIDEOGAMES, "TOMB RAIDER", "TOMB RAIDER"));
 	}
 }
 

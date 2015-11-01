@@ -249,11 +249,12 @@ public class AnswersManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.2f);
 		levelCompletedPanelCtrl.ShowPopUp();
-		currentLevel++;
-		if(currentLevel > maxLevel){
-			currentLevel = 1;
-		}
-		PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+//		currentLevel++;
+//		if(currentLevel > maxLevel){
+//			currentLevel = 1;
+//		}
+//		PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+		CategoriesManager.instance.SetCurrentLevel(true);
 	}
 							
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

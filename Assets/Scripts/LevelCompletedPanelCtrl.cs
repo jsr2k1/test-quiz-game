@@ -18,7 +18,8 @@ public class LevelCompletedPanelCtrl : MonoBehaviour
 	
 	void Start()
 	{
-		textLevelCompleted.text = "Level " + PlayerPrefs.GetInt("CurrentLevel") + " completed";
+		//textLevelCompleted.text = "Level " + PlayerPrefs.GetInt("CurrentLevel") + " completed";
+		textLevelCompleted.text = "Level " + CategoriesManager.instance.GetCurrentLevelInd().ToString() + " completed";
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -28,17 +28,17 @@ public class AudioManager : MonoBehaviour
 	public void PlayAudio(Audios audios)
 	{
 		if(audios == Audios.LevelComplete){
-			audio.volume = 1.0f;
-			audio.clip = levelCompleteAudio;
+			GetComponent<AudioSource>().volume = 1.0f;
+			GetComponent<AudioSource>().clip = levelCompleteAudio;
 		}
 		if(audios == Audios.ButtonClick){
-			audio.volume = 0.5f;
-			audio.clip = buttonClick;
+			GetComponent<AudioSource>().volume = 0.5f;
+			GetComponent<AudioSource>().clip = buttonClick;
 		}
 		if(audios == Audios.ButtonClickAlt){
-			audio.volume = 0.5f;
-			audio.clip = buttonClickAlt;
+			GetComponent<AudioSource>().volume = 0.5f;
+			GetComponent<AudioSource>().clip = buttonClickAlt;
 		}
-		audio.Play();
+		GetComponent<AudioSource>().Play();
 	}
 }

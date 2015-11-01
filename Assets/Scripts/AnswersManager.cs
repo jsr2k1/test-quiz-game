@@ -304,7 +304,6 @@ public class AnswersManager : MonoBehaviour
 				HideLetterInPanel(listButtonLetterCtrl[index].answer);
 			}
 			listButtonLetterCtrl[index].SetCorrectText();
-			
 		}
 		//Si hay 1 letras vacia -> rellenamos esa
 		else if(listEmpty.Count==1){
@@ -319,7 +318,7 @@ public class AnswersManager : MonoBehaviour
 			listButtonLetterCtrl[index].SetCorrectText();
 			HideLetterInPanel(listButtonLetterCtrl[index].answer);
 		}
-		
+		//Verificar si el nivel se ha completado
 		if(CheckLevelIsFinished()){
 			StartCoroutine(GotoNextLevel());
 		}else{

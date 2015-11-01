@@ -7,7 +7,7 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonPlayPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		StartCoroutine(DoLoadLevel("02 GameScene"));
+		StartCoroutine(DoLoadLevel("02 Categories"));
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,52 +15,71 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonResetPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		PlayerPrefs.SetInt("CurrentLevel", 1);
+		//PlayerPrefs.SetInt("CurrentLevel", 1);
+		CategoriesManager.instance.ResetAll();
 		PlayerPrefs.SetInt("SolveLetters", 50);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//COINS (02 GameScene) 
-	//De momento, lo uso para pasar directamente al siguiente nivel
-	public void OnButtonDebugNextLevelPressed()
+	//CATEGORY (02 Categories)
+	public void OnButtonCategoryPressed(string sCategory)
 	{
-		int maxLevel = AnswersManager.instance.maxLevel;
-		int currentLevel = AnswersManager.instance.currentLevel;
-		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
-		StartCoroutine(DoLoadLevel("02 GameScene"));
+		CategoriesManager.instance.SetCurrentCategory(sCategory);
+		StartCoroutine(DoLoadLevel("03 GameScene"));
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//COINS (02 GameScene) 
+	//NEXT-DEBUG (03 GameScene) 
+	//De momento, lo uso para pasar directamente al siguiente nivel
+	public void OnButtonDebugNextLevelPressed()
+	{
+		//int maxLevel = AnswersManager.instance.maxLevel;
+		//int currentLevel = AnswersManager.instance.currentLevel;
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		//PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
+		CategoriesManager.instance.SetCurrentLevel(true);
+		StartCoroutine(DoLoadLevel("03 GameScene"));
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//PREV-DEBUG (03 GameScene) 
 	//De momento, lo uso para pasar directamente al nivel anterior
 	public void OnButtonDebugPrevLevelPressed()
 	{
-		int maxLevel = AnswersManager.instance.maxLevel;
-		int currentLevel = AnswersManager.instance.currentLevel;
+		//int maxLevel = AnswersManager.instance.maxLevel;
+		//int currentLevel = AnswersManager.instance.currentLevel;
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		PlayerPrefs.SetInt("CurrentLevel", currentLevel>1 ? currentLevel-1 : maxLevel);
-		StartCoroutine(DoLoadLevel("02 GameScene"));
+		//PlayerPrefs.SetInt("CurrentLevel", currentLevel>1 ? currentLevel-1 : maxLevel);
+		CategoriesManager.instance.SetCurrentLevel(false);
+		StartCoroutine(DoLoadLevel("03 GameScene"));
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//NEXT (02 GameScene-PopUp)
+	//NEXT (03 GameScene-PopUp)
 	public void OnButtonNextPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		StartCoroutine(DoLoadLevel("02 GameScene"));
+		StartCoroutine(DoLoadLevel("03 GameScene"));
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//BACK (02 GameScene)
-	public void OnButtonBackPressed()
+	//BACK (02 Categories)
+	public void OnButtonBackCategoriesPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 		StartCoroutine(DoLoadLevel("01 Main"));
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//FACEBOOK (02 GameScene)
+	//BACK (03 GameScene)
+	public void OnButtonBackGameScenePressed()
+	{
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		StartCoroutine(DoLoadLevel("02 Categories"));
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//FACEBOOK (03 GameScene)
 	public void OnButtonFacebookPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
@@ -75,3 +94,6 @@ public class ButtonsManager : MonoBehaviour
 		Application.LoadLevel(level);
 	}
 }
+
+
+

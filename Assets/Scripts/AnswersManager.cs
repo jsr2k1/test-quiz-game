@@ -60,12 +60,9 @@ public class AnswersManager : MonoBehaviour
 	void Start()
 	{
 		maxLevel = LanguageManager.instance.numAnswers;
-		if(PlayerPrefs.HasKey("CurrentLevel")) {
-			currentLevel = PlayerPrefs.GetInt("CurrentLevel");
-		}else{
-			PlayerPrefs.SetInt("CurrentLevel", 1);
-			currentLevel = 1;
-		}
+		
+		SetCurrentLevel();
+		
 		randomNumbers = new List<List<int>>();
 		randomNumbers.Add(randomNumbers1);
 		randomNumbers.Add(randomNumbers2);
@@ -85,7 +82,21 @@ public class AnswersManager : MonoBehaviour
 		PopulateLettersPanel();
 
 		currentImage.sprite = Resources.Load<Sprite>("Characters/"+currentLevel.ToString("000"));
-		textCurrentLevel.text = currentLevel.ToString();
+		//textCurrentLevel.text = currentLevel.ToString();
+		textCurrentLevel.text = CategoriesManager.instance.GetCurrentLevelInd().ToString();
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	void SetCurrentLevel()
+	{
+//		if(PlayerPrefs.HasKey("CurrentLevel")) {
+//			currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+//		}else{
+//			PlayerPrefs.SetInt("CurrentLevel", 1);
+//			currentLevel = 1;
+//		}
+		currentLevel = CategoriesManager.instance.GetCurrentLevel();
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,17 +115,14 @@ public class AnswersManager : MonoBehaviour
 	{
 		//Go to next level
 		if(Input.GetKeyUp(KeyCode.N)){
-			PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
+			//PlayerPrefs.SetInt("CurrentLevel", currentLevel<maxLevel ? currentLevel+1 : 1);
+			CategoriesManager.instance.SetCurrentLevel(true);
 			Application.LoadLevel(Application.loadedLevel);
 		}
 		//Go to previous level
 		if(Input.GetKeyUp(KeyCode.P)){
-			PlayerPrefs.SetInt("CurrentLevel", currentLevel>1 ? currentLevel-1 : maxLevel);
-			Application.LoadLevel(Application.loadedLevel);
-		}
-		//Reset
-		if(Input.GetKeyUp(KeyCode.R)){
-			PlayerPrefs.SetInt("CurrentLevel", 1);
+			//PlayerPrefs.SetInt("CurrentLevel", currentLevel>1 ? currentLevel-1 : maxLevel);
+			CategoriesManager.instance.SetCurrentLevel(false);
 			Application.LoadLevel(Application.loadedLevel);
 		}
 	}

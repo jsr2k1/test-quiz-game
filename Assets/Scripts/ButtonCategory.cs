@@ -12,15 +12,12 @@ public class ButtonCategory : MonoBehaviour
 
 	void Start()
 	{	
-		int level = PlayerPrefs.GetInt(category)+1;
+		int level = PlayerPrefs.GetInt(category);
 		
 		//Update level
 		if(PlayerPrefs.HasKey(category)){
 			sLevel.text = level+"/10";
-		}else{
-			sLevel.text = "1/10";
 		}
-		
 		//Update progress bar
 		progressFill.fillAmount = (float)level/10F;
 	}

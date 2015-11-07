@@ -72,18 +72,33 @@ public class CategoriesManager : MonoBehaviour
 	{
 		if(PlayerPrefs.HasKey("animations")){
 			animations.CurrentLevel = PlayerPrefs.GetInt("animations");
+		}else{
+			animations.CurrentLevel = 0;
+			PlayerPrefs.SetInt("animations", 0);
 		}
 		if(PlayerPrefs.HasKey("cartoons")){
 			cartoons.CurrentLevel = PlayerPrefs.GetInt("cartoons");
+		}else{
+			cartoons.CurrentLevel = 0;
+			PlayerPrefs.SetInt("cartoons", 0);
 		}
 		if(PlayerPrefs.HasKey("tv")){
 			tv.CurrentLevel = PlayerPrefs.GetInt("tv");
+		}else{
+			tv.CurrentLevel = 0;
+			PlayerPrefs.SetInt("tv", 0);
 		}
 		if(PlayerPrefs.HasKey("movies")){
 			movies.CurrentLevel = PlayerPrefs.GetInt("movies");
+		}else{
+			movies.CurrentLevel = 0;
+			PlayerPrefs.SetInt("movies", 0);
 		}
 		if(PlayerPrefs.HasKey("videogames")){
 			videogames.CurrentLevel = PlayerPrefs.GetInt("videogames");
+		}else{
+			videogames.CurrentLevel = 0;
+			PlayerPrefs.SetInt("videogames", 0);
 		}
 	}
 	
@@ -102,11 +117,11 @@ public class CategoriesManager : MonoBehaviour
 	
 	public bool CategoryCompleted(string s)
 	{
-		if(s=="animations"){ return animations.CurrentLevel==9; }
-		else if(s=="cartoons"){ return cartoons.CurrentLevel==9; }
-		else if(s=="tv"){ return tv.CurrentLevel==9; }
-		else if(s=="movies"){ return movies.CurrentLevel==9; }
-		else if(s=="videogames"){ return videogames.CurrentLevel==9; }
+		if(s=="animations"){ return animations.CurrentLevel==10; }
+		else if(s=="cartoons"){ return cartoons.CurrentLevel==10; }
+		else if(s=="tv"){ return tv.CurrentLevel==10; }
+		else if(s=="movies"){ return movies.CurrentLevel==10; }
+		else if(s=="videogames"){ return videogames.CurrentLevel==10; }
 		
 		return true;
 	}
@@ -130,7 +145,7 @@ public class CategoriesManager : MonoBehaviour
 	public void SetCurrentLevel(bool add)
 	{
 		if(add){
-			if(currentCategory.CurrentLevel<9){
+			if(currentCategory.CurrentLevel<10){
 				currentCategory.CurrentLevel++;
 			}
 			PlayerPrefs.SetInt(currentCategory.Id, currentCategory.CurrentLevel);

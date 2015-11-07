@@ -18,20 +18,17 @@ public class CoinsManager : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
-	
-//		coins = PlayerPrefs.GetInt("Coins");
-//		textCoins.text = coins.ToString();
 		
 		solveLetters = PlayerPrefs.GetInt("SolveLetters");
 		textSolveLetters.text = solveLetters.ToString();
 		
-		//ads
+		//TODO: ads rellenar!
 		if(Advertisement.isSupported) {
 			//Advertisement.allowPrecache = true; //Obsolete
 			#if UNITY_ANDROID
 			Advertisement.Initialize("84320", false/*testMode*/); //Android
 			#else
-			Advertisement.Initialize("...RELLENAR!!", false/*testMode*/); //iOS
+			Advertisement.Initialize("...", false/*testMode*/); //iOS
 			#endif
 		}else{
 			Debug.Log("Platform not supported");
@@ -97,6 +94,7 @@ public class CoinsManager : MonoBehaviour
 		if(result == ShowResult.Finished){
 			solveLetters = PlayerPrefs.GetInt("SolveLetters");
 			solveLetters++;
+			PlayerPrefs.SetInt("SolveLetters", solveLetters);
 			textSolveLetters.text = solveLetters.ToString();
 			ShopPopUpAnimator.SetTrigger("HidePopUp");
 		}

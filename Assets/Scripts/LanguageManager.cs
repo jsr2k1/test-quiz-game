@@ -150,7 +150,7 @@ public class LanguageManager : MonoBehaviour
 	
 	void fillDict()
 	{
-		//Etiquetas botones
+		//Etiquetas botones y textos
 		dict.Add("id_play", new DictEntry(Categories.NULL, "JUGAR", "PLAY"));
 		dict.Add("id_connect", new DictEntry(Categories.NULL, "CONECTAR", "CONNECT"));
 		dict.Add("id_settings", new DictEntry(Categories.NULL, "AJUSTES", "SETTINGS"));
@@ -160,6 +160,12 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_back", new DictEntry(Categories.NULL, "VOLVER", "BACK"));
 		dict.Add("id_shop", new DictEntry(Categories.NULL, "TIENDA", "SHOP"));
 		dict.Add("id_ads", new DictEntry(Categories.NULL, "GRATIS (Anuncio)", "FREE (View Ad)"));
+		dict.Add("id_welldone", new DictEntry(Categories.NULL, "BIEN HECHO!", "WELL DONE!"));
+		dict.Add("id_level", new DictEntry(Categories.NULL, "Nivel", "Level"));
+		dict.Add("id_completed", new DictEntry(Categories.NULL, "completado", "completed"));
+		dict.Add("id_next", new DictEntry(Categories.NULL, "Siguiente", "Next"));
+		dict.Add("id_reset", new DictEntry(Categories.NULL, "¿Est\u00E1s seguro? Perder\u00E1s el progreso!", "Are you sure? All progress will be lost!"));
+		
 
 		//Categorias
 		dict.Add("id_categories", new DictEntry(Categories.NULL, "CATEGOR\u00CDA", "CATEGORY"));

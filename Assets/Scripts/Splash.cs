@@ -12,9 +12,6 @@ public class Splash : MonoBehaviour
 		if(!PlayerPrefs.HasKey("CurrentLevel")){
 			PlayerPrefs.SetInt("CurrentLevel", 1);
 		}
-//		if(!PlayerPrefs.HasKey("Coins")){
-//			PlayerPrefs.SetInt("Coins", 9000);
-//		}
 		if(!PlayerPrefs.HasKey("SolveLetters")){
 			PlayerPrefs.SetInt("SolveLetters", 20);
 		}

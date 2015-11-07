@@ -79,7 +79,8 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonNextPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		if(CategoriesManager.instance.GetCurrentLevel()>9){
+		int level = CategoriesManager.instance.GetCurrentLevelInd();
+		if(level>10){
 			StartCoroutine(DoLoadLevel("02 Categories"));
 		}else{
 			StartCoroutine(DoLoadLevel("03 GameScene"));

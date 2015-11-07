@@ -100,6 +100,19 @@ public class CategoriesManager : MonoBehaviour
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public bool CategoryCompleted(string s)
+	{
+		if(s=="animations"){ return animations.CurrentLevel==9; }
+		else if(s=="cartoons"){ return cartoons.CurrentLevel==9; }
+		else if(s=="tv"){ return tv.CurrentLevel==9; }
+		else if(s=="movies"){ return movies.CurrentLevel==9; }
+		else if(s=="videogames"){ return videogames.CurrentLevel==9; }
+		
+		return true;
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public int GetCurrentLevel()
 	{
 		return currentCategory.GetCurrentLevel();
@@ -119,8 +132,6 @@ public class CategoriesManager : MonoBehaviour
 		if(add){
 			if(currentCategory.CurrentLevel<9){
 				currentCategory.CurrentLevel++;
-			}else{
-				currentCategory.CurrentLevel=0;
 			}
 			PlayerPrefs.SetInt(currentCategory.Id, currentCategory.CurrentLevel);
 		}else{

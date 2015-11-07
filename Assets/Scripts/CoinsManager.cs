@@ -19,15 +19,15 @@ public class CoinsManager : MonoBehaviour
 	{
 		instance = this;
 	
-		coins = PlayerPrefs.GetInt("Coins");
-		textCoins.text = coins.ToString();
+//		coins = PlayerPrefs.GetInt("Coins");
+//		textCoins.text = coins.ToString();
 		
 		solveLetters = PlayerPrefs.GetInt("SolveLetters");
 		textSolveLetters.text = solveLetters.ToString();
 		
 		//ads
 		if(Advertisement.isSupported) {
-			Advertisement.allowPrecache = true;
+			//Advertisement.allowPrecache = true; //Obsolete
 			#if UNITY_ANDROID
 			Advertisement.Initialize("84320", false/*testMode*/); //Android
 			#else
@@ -42,7 +42,7 @@ public class CoinsManager : MonoBehaviour
 
 	void Update()
 	{
-		if(Advertisement.isReady()){
+		if(Advertisement.IsReady()){
 			buttonsAds.interactable = true;
 		}else{
 			buttonsAds.interactable = false;
@@ -83,8 +83,8 @@ public class CoinsManager : MonoBehaviour
 	
 	public void OnButtonAdsPressed()
 	{
-		if(Advertisement.isReady()){
-			Advertisement.Show(null, new ShowOptions { pause = false, resultCallback = ResultCallback } );
+		if(Advertisement.IsReady()){
+			Advertisement.Show(null, new ShowOptions { /*pause = false,*/ resultCallback = ResultCallback } );
 		}
 	}
 	

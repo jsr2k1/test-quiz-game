@@ -3,11 +3,30 @@ using System.Collections;
 
 public class ButtonsManager : MonoBehaviour
 {
+	public Animator animatorPopUpReset;
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//PLAY (01 Main)
 	public void OnButtonPlayPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
 		StartCoroutine(DoLoadLevel("02 Categories"));
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void OnShowResetPopUp()
+	{
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		animatorPopUpReset.SetTrigger("ShowPopUp");
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void OnHideResetPopUp()
+	{
+		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
+		animatorPopUpReset.SetTrigger("HidePopUp");
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,9 +34,8 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonResetPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		//PlayerPrefs.SetInt("CurrentLevel", 1);
 		CategoriesManager.instance.ResetAll();
-		PlayerPrefs.SetInt("SolveLetters", 50);
+		animatorPopUpReset.SetTrigger("HidePopUp");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +43,9 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonCategoryPressed(string sCategory)
 	{
 		CategoriesManager.instance.SetCurrentCategory(sCategory);
-		StartCoroutine(DoLoadLevel("03 GameScene"));
+		if(!CategoriesManager.instance.CategoryCompleted(sCategory)){
+			StartCoroutine(DoLoadLevel("03 GameScene"));
+		}
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +79,11 @@ public class ButtonsManager : MonoBehaviour
 	public void OnButtonNextPressed()
 	{
 		AudioManager.instance.PlayAudio(AudioManager.Audios.ButtonClick);
-		StartCoroutine(DoLoadLevel("03 GameScene"));
+		if(CategoriesManager.instance.GetCurrentLevel()>9){
+			StartCoroutine(DoLoadLevel("02 Categories"));
+		}else{
+			StartCoroutine(DoLoadLevel("03 GameScene"));
+		}
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

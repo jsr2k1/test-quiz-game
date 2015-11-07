@@ -37,6 +37,18 @@ public class LanguageManager : MonoBehaviour
 		VIDEOGAMES,
 		NULL
 	};
+	
+	enum Languages{
+		EN,
+		ES
+	};
+	Languages currentLanguage;
+	
+	public delegate void LanguageChanged();
+	public static event LanguageChanged OnLanguageChanged;
+	
+	public Toggle toggleES;
+	public Toggle toggleEN;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -47,6 +59,46 @@ public class LanguageManager : MonoBehaviour
 		dict = new Dictionary<string, DictEntry>();
 		fillDict();
 		numAnswers = dict.Count(o => o.Key.StartsWith("id_answer"));
+		SetLanguage();
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	void SetLanguage()
+	{
+		if(PlayerPrefs.HasKey("language")){
+			if(PlayerPrefs.GetString("language") == "ES"){
+				currentLanguage = Languages.ES;
+				toggleES.isOn = true;
+			}else{
+				currentLanguage = Languages.EN;
+				toggleEN.isOn = true;
+			}
+		}else{
+			if(Application.systemLanguage == SystemLanguage.Spanish){
+				currentLanguage = Languages.ES;
+				toggleES.isOn = true;
+			}else{
+				currentLanguage = Languages.EN;
+				toggleEN.isOn = true;
+			}
+		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void OnButtonLanguagePressed(int id)
+	{
+		if(id==0){
+			currentLanguage = Languages.EN;
+			PlayerPrefs.SetString("language", "EN");
+		}else{
+			currentLanguage = Languages.ES;
+			PlayerPrefs.SetString("language", "ES");
+		}
+		if(OnLanguageChanged!=null){
+			OnLanguageChanged();
+		}
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,13 +106,10 @@ public class LanguageManager : MonoBehaviour
 	public string GetText(string id)
 	{
 		if(dict.ContainsKey(id)){
-			if(Application.systemLanguage == SystemLanguage.Spanish){
+			if(currentLanguage == Languages.ES){
 				return dict[id].answer_ES;
-			}
-			else if(Application.systemLanguage == SystemLanguage.English){
-				return dict[id].answer_EN;
 			}else{
-				return "ERROR";
+				return dict[id].answer_EN;
 			}
 		}else{
 			Debug.Log("No se encuentra la key en el diccionario: " + id);
@@ -108,13 +157,16 @@ public class LanguageManager : MonoBehaviour
 		dict.Add("id_quit", new DictEntry(Categories.NULL, "¿SALIR DEL JUEGO?", "EXIT GAME?"));
 		dict.Add("id_yes", new DictEntry(Categories.NULL, "SI", "YES"));
 		dict.Add("id_no", new DictEntry(Categories.NULL, "NO", "NO"));
-		dict.Add("id_back", new DictEntry(Categories.NULL, "SALIR", "BACK"));
+		dict.Add("id_back", new DictEntry(Categories.NULL, "VOLVER", "BACK"));
+		dict.Add("id_shop", new DictEntry(Categories.NULL, "TIENDA", "SHOP"));
+		dict.Add("id_ads", new DictEntry(Categories.NULL, "GRATIS (Anuncio)", "FREE (View Ad)"));
 
 		//Categorias
+		dict.Add("id_categories", new DictEntry(Categories.NULL, "CATEGOR\u00CDA", "CATEGORY"));
 		dict.Add("id_animation", new DictEntry(Categories.NULL, "ANIMACI\u00D3N", "ANIMATION"));
-		dict.Add("id_cartoons", new DictEntry(Categories.NULL, "DIBUJOS ANIMADOS", "CARTOONS"));
+		dict.Add("id_cartoons", new DictEntry(Categories.NULL, "DIBUJOS", "CARTOONS"));
 		dict.Add("id_tv", new DictEntry(Categories.NULL, "TV", "TV"));
-		dict.Add("id_movies", new DictEntry(Categories.NULL, "CINE & TV", "MOVIES & TV"));
+		dict.Add("id_movies", new DictEntry(Categories.NULL, "CINE", "MOVIES"));
 		dict.Add("id_videogames", new DictEntry(Categories.NULL, "VIDEOJUEGOS", "VIDEOGAMES"));
 		
 		//Respuestas
